@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import Moveable from "react-moveable";
 import axios from 'axios';
+import './App.css';
 
 
 const App = () => {
@@ -18,11 +19,10 @@ const App = () => {
     //save sata
     .then( res => setPhotos(res.data))
   },[])
-  // console.log(photos)
 
   const addMoveable = () => {
     // Create a new moveable component and add it to the array
-    const COLORS = ["red", "blue", "yellow", "green", "purple"];
+    // const COLORS = ["red", "blue", "yellow", "green", "purple"];
 
     setMoveableComponents([
       ...moveableComponents,
@@ -32,7 +32,6 @@ const App = () => {
         left: 0,
         width: 100,
         height: 100,
-        // color: COLORS[Math.floor(Math.random() * COLORS.length)],
         background: `url(${photos[photoId-1].url})`,
         updateEnd: true
       },
@@ -137,13 +136,16 @@ const Component = ({
   const onResize = async (e) => {
     // ACTUALIZAR ALTO Y ANCHO
     let newWidth = e.width;
+
     let newHeight = e.height;
 
     const positionMaxTop = top + newHeight;
+
     const positionMaxLeft = left + newWidth;
 
     if (positionMaxTop > parentBounds?.height)
       newHeight = parentBounds?.height - top;
+      console.log(newHeight)
     if (positionMaxLeft > parentBounds?.width)
       newWidth = parentBounds?.width - left;
 
@@ -184,7 +186,7 @@ const Component = ({
     const positionMaxLeft = left + newWidth;
 
     if (positionMaxTop > parentBounds?.height)
-      newHeight = parentBounds?.height - top;
+      newHeight = parentBounds?.height- top;
     if (positionMaxLeft > parentBounds?.width)
       newWidth = parentBounds?.width - left;
 
@@ -192,8 +194,8 @@ const Component = ({
     const { drag } = lastEvent;
     const { beforeTranslate } = drag;
 
-    const absoluteTop = top + beforeTranslate[1];
-    const absoluteLeft = left + beforeTranslate[0];
+    const absoluteTop = top ;
+    const absoluteLeft = left ;
 
     updateMoveable(
       id,

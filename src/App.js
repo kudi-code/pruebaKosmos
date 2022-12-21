@@ -20,6 +20,18 @@ const App = () => {
     .then( res => setPhotos(res.data))
   },[])
 
+  const eraseComponent = (componentId) => {
+    this.delete(`component-${componentId}`)
+  }
+
+  const deleteButton = (componentId) => {
+    return(
+      <button onClick={eraseComponent(componentId)}>
+        {`Erase Component ${componentId}`}
+      </button>
+    )
+  }
+
   const addMoveable = () => {
     // Create a new moveable component and add it to the array
     // const COLORS = ["red", "blue", "yellow", "green", "purple"];
@@ -73,11 +85,11 @@ const App = () => {
   return (
     
     <main style={{ height : "100vh", width: "100vw" }}>
-      {/* <div style={{
-          backgroundImage: `url(${photos[photoId].url})`,
-          height : "20%", width: "20%"
-      }}></div> */}
-      <button onClick={addMoveable}>Add Moveable1</button>
+      <button onClick={addMoveable}>Add Moveable</button>
+      {
+        
+      }
+      
       <div
         id="parent"
         style={{
@@ -160,6 +172,7 @@ const Component = ({
 
     // ACTUALIZAR NODO REFERENCIA
     const beforeTranslate = e.drag.beforeTranslate;
+    console.log(beforeTranslate)
 
     ref.current.style.width = `${e.width}px`;
     ref.current.style.height = `${e.height}px`;
@@ -194,6 +207,7 @@ const Component = ({
     const { drag } = lastEvent;
     const { beforeTranslate } = drag;
 
+    //Fixing
     const absoluteTop = top ;
     const absoluteLeft = left ;
 

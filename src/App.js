@@ -8,6 +8,9 @@ const App = () => {
   const [selected, setSelected] = useState(null);
   //Adding photos
   const [photos, setPhotos] = useState({})
+  //id of photo
+  const [photoId, setPhotoId] = useState(1)
+
 
   //Get data from jsonplaceholder
   useEffect(() => {
@@ -15,7 +18,7 @@ const App = () => {
     //save sata
     .then( res => setPhotos(res.data))
   },[])
-  console.log(photos)
+  // console.log(photos)
 
   const addMoveable = () => {
     // Create a new moveable component and add it to the array
@@ -24,15 +27,17 @@ const App = () => {
     setMoveableComponents([
       ...moveableComponents,
       {
-        id: Math.floor(Math.random() * Date.now()),
+        id: photos[photoId-1].id,
         top: 0,
         left: 0,
         width: 100,
         height: 100,
-        color: COLORS[Math.floor(Math.random() * COLORS.length)],
+        // color: COLORS[Math.floor(Math.random() * COLORS.length)],
+        backgroundImage: `url(${photos[photoId-1].url})`,
         updateEnd: true
       },
     ]);
+    setPhotoId(photoId+1)
   };
 
   const updateMoveable = (id, newComponent, updateEnd = false) => {
@@ -73,9 +78,10 @@ const App = () => {
         id="parent"
         style={{
           position: "relative",
-          background: "black",
           height: "80vh",
           width: "80vw",
+          backgroundImage: `url(${photos[photoId-1].url})`,
+
         }}
       >
         {moveableComponents.map((item, index) => (

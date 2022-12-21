@@ -33,7 +33,7 @@ const App = () => {
         width: 100,
         height: 100,
         // color: COLORS[Math.floor(Math.random() * COLORS.length)],
-        backgroundImage: `url(${photos[photoId-1].url})`,
+        background: `url(${photos[photoId-1].url})`,
         updateEnd: true
       },
     ]);
@@ -72,16 +72,20 @@ const App = () => {
   };
 
   return (
+    
     <main style={{ height : "100vh", width: "100vw" }}>
+      {/* <div style={{
+          backgroundImage: `url(${photos[photoId].url})`,
+          height : "20%", width: "20%"
+      }}></div> */}
       <button onClick={addMoveable}>Add Moveable1</button>
       <div
         id="parent"
         style={{
           position: "relative",
+          background: "black",
           height: "80vh",
           width: "80vw",
-          backgroundImage: `url(${photos[photoId-1].url})`,
-
         }}
       >
         {moveableComponents.map((item, index) => (
@@ -109,6 +113,7 @@ const Component = ({
   height,
   index,
   color,
+  background,
   id,
   setSelected,
   isSelected = false,
@@ -148,6 +153,7 @@ const Component = ({
       width: newWidth,
       height: newHeight,
       color,
+      background
     });
 
     // ACTUALIZAR NODO REFERENCIA
@@ -197,6 +203,7 @@ const Component = ({
         width: newWidth,
         height: newHeight,
         color,
+        background
       },
       true
     );
@@ -214,7 +221,7 @@ const Component = ({
           left: left,
           width: width,
           height: height,
-          background: color,
+          background: background,
         }}
         onClick={() => setSelected(id)}
       />
@@ -229,7 +236,8 @@ const Component = ({
             left: e.left,
             width,
             height,
-            color,
+            background,
+            
           });
         }}
         onResize={onResize}
@@ -242,6 +250,7 @@ const Component = ({
         origin={false}
         padding={{ left: 0, top: 0, right: 0, bottom: 0 }}
       />
+      
     </>
   );
 };
